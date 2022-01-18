@@ -9,6 +9,9 @@ public class Customer {
         this.lastName = lastName;
     }
 
+    public Customer() {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -7,6 +7,9 @@ public class Branch {
         this.name = name;
     }
 
+    public Branch() {
+    }
+
     public Integer getId() {
         return id;
     }

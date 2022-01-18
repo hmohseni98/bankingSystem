@@ -1,4 +1,5 @@
-public enum Post {
+public enum Department {
+    itManager,
     branchManager,
     financialManager,
     commercialManager,
