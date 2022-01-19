@@ -11,7 +11,9 @@ public class EmployeeSegmentation {
         this.branch = branch;
         this.manager = manager;
         this.departmentName = departmentName;
+    }
 
+    public EmployeeSegmentation() {
     }
 
     public Integer getId() {

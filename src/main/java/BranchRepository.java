@@ -12,12 +12,18 @@ public class BranchRepository {
         preparedStatement.close();
     }
 
-    public void insert(Branch branch) throws SQLException {
+    public Integer insert(Branch branch) throws SQLException {
         String insert = "INSERT INTO branch (name) VALUES (?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(insert);
+        PreparedStatement preparedStatement = connection.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, branch.getName());
         preparedStatement.execute();
+        ResultSet generatedKey = preparedStatement.getGeneratedKeys();
+        Integer id = null;
+        if (generatedKey.next()) {
+            id = generatedKey.getInt(1);
+        }
         preparedStatement.close();
+        return id;
     }
 
     public void update(Branch branch) throws SQLException {
@@ -40,25 +46,26 @@ public class BranchRepository {
         preparedStatement.close();
     }
 
-    public BranchList findAll() throws SQLException{
+    public BranchList findAll() throws SQLException {
         String findAll = "SELECT * FROM branch ";
         PreparedStatement preparedStatement = connection.prepareStatement(findAll);
-        ResultSet resultSet =preparedStatement.executeQuery();
+        ResultSet resultSet = preparedStatement.executeQuery();
         BranchList branchList = new BranchList();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             branchList.add(new Branch(resultSet.getInt("id"),
                     resultSet.getString("name")));
         }
         return branchList;
     }
-    public Branch findById(Integer id) throws SQLException{
+
+    public Branch findById(Integer id) throws SQLException {
         String findById = "SELECT * FROM branch " +
                 "WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(findById);
-        preparedStatement.setInt(1,id);
-        ResultSet resultSet =preparedStatement.executeQuery();
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
         Branch branch1 = null;
-        if (resultSet.next()){
+        if (resultSet.next()) {
             new Branch(resultSet.getInt("id"),
                     resultSet.getString("name"));
         }

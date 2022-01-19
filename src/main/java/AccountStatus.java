@@ -1,4 +1,4 @@
 public enum AccountStatus {
     active,
-    deActive
+    deactive
 }

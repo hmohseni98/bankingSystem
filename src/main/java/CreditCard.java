@@ -19,6 +19,9 @@ public class CreditCard {
         this.expireDate = expireDate;
     }
 
+    public CreditCard() {
+    }
+
     public Integer getId() {
         return id;
     }

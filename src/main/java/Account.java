@@ -2,15 +2,13 @@ public class Account {
     private Integer id;
     private Branch branch;
     private Customer customer;
-    private Integer accountNumber;
     private Integer amount;
     private AccountStatus accountStatus;
 
-    public Account(Integer id, Branch branch, Customer customer, Integer accountNumber, Integer amount, AccountStatus accountStatus) {
+    public Account(Integer id, Branch branch, Customer customer, Integer amount, AccountStatus accountStatus) {
         this.id = id;
         this.branch = branch;
         this.customer = customer;
-        this.accountNumber = accountNumber;
         this.amount = amount;
         this.accountStatus = accountStatus;
     }
@@ -40,14 +38,6 @@ public class Account {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public Integer getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(Integer accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public Integer getAmount() {

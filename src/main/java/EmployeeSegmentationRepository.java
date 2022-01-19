@@ -8,10 +8,10 @@ public class EmployeeSegmentationRepository {
                 "id serial primary key, " +
                 "employee_id int, " +
                 "branch_id int, " +
-                "manager_id int " +
+                "manager_id int, " +
                 "department_name varchar(20), " +
-                "CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employee(id) " +
-                "CONSTRAINT fk_branch FOREIGN KEY (branch_id) REFERENCES branch(id) " +
+                "CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employee(id), " +
+                "CONSTRAINT fk_branch FOREIGN KEY (branch_id) REFERENCES branch(id), " +
                 "CONSTRAINT fk_employee_manager FOREIGN KEY (manager_id) REFERENCES employee(id));";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.execute();
@@ -23,7 +23,7 @@ public class EmployeeSegmentationRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setInt(1, employeeSegmentation.getEmployee().getId());
         preparedStatement.setInt(2, employeeSegmentation.getBranch().getId());
-        preparedStatement.setInt(3, employeeSegmentation.getEmployee().getId());
+        preparedStatement.setInt(3, employeeSegmentation.getManager().getId());
         preparedStatement.setString(4, employeeSegmentation.getDepartmentName().name());
         preparedStatement.execute();
         preparedStatement.close();

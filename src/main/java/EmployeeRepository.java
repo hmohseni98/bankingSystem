@@ -12,14 +12,21 @@ public class EmployeeRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.execute();
         preparedStatement.close();
+
     }
-    public void insert(Employee employee) throws SQLException {
+    public Integer insert(Employee employee) throws SQLException {
         String insert = "INSERT INTO employee (first_name,last_name) VALUES (?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(insert);
+        PreparedStatement preparedStatement = connection.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, employee.getFirstName());
         preparedStatement.setString(2, employee.getLastName());
         preparedStatement.execute();
+        ResultSet generatedKey = preparedStatement.getGeneratedKeys();
+        Integer id = null;
+        if (generatedKey.next()){
+            id = generatedKey.getInt(1);
+        }
         preparedStatement.close();
+        return id;
     }
     public void update(Employee employee) throws SQLException {
         String update = "UPDATE employee " +

@@ -8,8 +8,8 @@ public class TransactionRepository {
                 "id serial primary key, " +
                 "account_id int, " +
                 "amount int, " +
-                "status status, " +
-                "type type, " +
+                "status transactionStatus, " +
+                "type transactionType, " +
                 "CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES account(id));";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.execute();
