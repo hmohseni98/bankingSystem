@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class BranchRepository {
-    Connection connection = CreateConnection.connection;
+    private Connection connection = CreateConnection.connection;
 
     public BranchRepository() throws SQLException {
         String createTable = "CREATE TABLE IF NOT EXISTS branch( " +

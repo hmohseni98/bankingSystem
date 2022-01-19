@@ -1,9 +1,8 @@
-import com.sun.imageio.plugins.common.I18N;
 
 import java.sql.*;
 
 public class CreditCardRepository {
-    Connection connection = CreateConnection.connection;
+    private Connection connection = CreateConnection.connection;
 
     public CreditCardRepository() throws SQLException {
         String createTable = "CREATE TABLE IF NOT EXISTS credit_card( " +

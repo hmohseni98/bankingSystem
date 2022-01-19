@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class EmployeeRepository {
 
-    Connection connection = CreateConnection.connection;
+    private Connection connection = CreateConnection.connection;
 
     public EmployeeRepository() throws SQLException{
         String createTable = "CREATE TABLE IF NOT EXISTS employee( " +

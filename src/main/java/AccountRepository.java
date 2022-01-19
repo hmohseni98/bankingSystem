@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class AccountRepository {
 
-    Connection connection = CreateConnection.connection;
+    private Connection connection = CreateConnection.connection;
 
     public AccountRepository() throws SQLException {
         String createTable = "CREATE TABLE IF NOT EXISTS account( " +
@@ -75,7 +75,7 @@ public class AccountRepository {
                             resultSet.getString("last_name")),
                     resultSet.getInt("account_number"),
                     resultSet.getInt("amount"),
-                    Status.valueOf(resultSet.getString("status"))));
+                    AccountStatus.valueOf(resultSet.getString("status"))));
         }
         return accountList;
     }
@@ -100,7 +100,7 @@ public class AccountRepository {
                             resultSet.getString("last_name")),
                     resultSet.getInt("account_number"),
                     resultSet.getInt("amount"),
-                    Status.valueOf(resultSet.getString("status")));
+                    AccountStatus.valueOf(resultSet.getString("status")));
             preparedStatement.close();
         }
         return account1;

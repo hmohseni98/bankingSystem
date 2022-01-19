@@ -4,15 +4,15 @@ public class Account {
     private Customer customer;
     private Integer accountNumber;
     private Integer amount;
-    private Status status;
+    private AccountStatus accountStatus;
 
-    public Account(Integer id, Branch branch, Customer customer, Integer accountNumber, Integer amount, Status status) {
+    public Account(Integer id, Branch branch, Customer customer, Integer accountNumber, Integer amount, AccountStatus accountStatus) {
         this.id = id;
         this.branch = branch;
         this.customer = customer;
         this.accountNumber = accountNumber;
         this.amount = amount;
-        this.status = status;
+        this.accountStatus = accountStatus;
     }
 
     public Account() {
@@ -58,11 +58,11 @@ public class Account {
         this.amount = amount;
     }
 
-    public Status getStatus() {
-        return status;
+    public AccountStatus getStatus() {
+        return accountStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
     }
 }

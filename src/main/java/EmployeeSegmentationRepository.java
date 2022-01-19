@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class EmployeeSegmentationRepository {
-    Connection connection = CreateConnection.connection;
+    private Connection connection = CreateConnection.connection;
 
     public EmployeeSegmentationRepository() throws SQLException {
         String createTable = "CREATE TABLE IF NOT EXISTS employee_segmentation( " +
