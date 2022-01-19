@@ -1,4 +1,4 @@
 public enum TransactionType {
     withdraw,
-    Deposit
+    deposit
 }

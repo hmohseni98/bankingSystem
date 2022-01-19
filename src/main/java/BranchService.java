@@ -10,4 +10,7 @@ public class BranchService {
         branch = branchRepository.findById(id);
         return branch;
     }
+    public BranchList findAll() throws SQLException{
+        return branchRepository.findAll();
+    }
 }

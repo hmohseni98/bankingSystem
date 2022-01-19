@@ -74,6 +74,19 @@ public class CreditCard {
         return expireDate;
     }
 
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "id=" + id +
+                ", account=" + account +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", firstPassword=" + firstPassword +
+                ", secondPassword=" + secondPassword +
+                ", cvv2=" + cvv2 +
+                ", expireDate=" + expireDate +
+                '}';
+    }
+
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
     }

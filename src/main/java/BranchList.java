@@ -44,8 +44,12 @@ public class BranchList {
     public void showList() {
         for (int i = 0; i < emptyHomeIndex; i++) {
             if (list[i] != null){
-                System.out.print(list[i]);
-                System.out.print(", ");
+                System.out.print(list[i].getId());
+                System.out.print("  ");
+                System.out.print(list[i].getName());
+                System.out.print("  ");
+                System.out.println();
+
             }
             else {
                 System.out.print("null");

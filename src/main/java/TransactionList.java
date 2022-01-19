@@ -44,8 +44,19 @@ public class TransactionList {
     public void showList() {
         for (int i = 0; i < emptyHomeIndex; i++) {
             if (list[i] != null){
-                System.out.print(list[i]);
-                System.out.print(", ");
+                System.out.print(list[i].getId());
+                System.out.print("   ");
+                System.out.print(list[i].getAccount().getId());
+                System.out.print("   ");
+                System.out.print(list[i].getAmount());
+                System.out.print("   ");
+                System.out.print(list[i].getStatus());
+                System.out.print("   ");
+                System.out.print(list[i].getType());
+                System.out.print("   ");
+                System.out.print(list[i].getDate());
+                System.out.print("   ");
+                System.out.println();
             }
             else {
                 System.out.print("null");

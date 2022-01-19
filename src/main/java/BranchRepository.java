@@ -64,12 +64,12 @@ public class BranchRepository {
         PreparedStatement preparedStatement = connection.prepareStatement(findById);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        Branch branch1 = null;
+        Branch branch = null;
         if (resultSet.next()) {
-            new Branch(resultSet.getInt("id"),
+            branch = new Branch(resultSet.getInt("id"),
                     resultSet.getString("name"));
         }
-        return branch1;
+        return branch;
     }
 
 }

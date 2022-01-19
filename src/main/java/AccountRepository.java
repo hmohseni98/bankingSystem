@@ -45,7 +45,7 @@ public class AccountRepository {
         preparedStatement.setInt(1, account.getBranch().getId());
         preparedStatement.setInt(2, account.getCustomer().getId());
         preparedStatement.setInt(3, account.getAmount());
-        preparedStatement.setString(4, account.getStatus().name());
+        preparedStatement.setObject(4, account.getStatus().name(), Types.OTHER);
         preparedStatement.setInt(5, account.getId());
         preparedStatement.execute();
         preparedStatement.close();
@@ -101,7 +101,7 @@ public class AccountRepository {
                             resultSet.getString("first_name"),
                             resultSet.getString("last_name")),
                     resultSet.getInt("amount"),
-                    AccountStatus.valueOf(resultSet.getString("status")));
+                    AccountStatus.valueOf(resultSet.getString("active_status")));
             preparedStatement.close();
         }
         return account1;

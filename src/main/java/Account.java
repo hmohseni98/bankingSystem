@@ -12,6 +12,12 @@ public class Account {
         this.amount = amount;
         this.accountStatus = accountStatus;
     }
+    public Account(Branch branch, Customer customer, Integer amount, AccountStatus accountStatus) {
+        this.branch = branch;
+        this.customer = customer;
+        this.amount = amount;
+        this.accountStatus = accountStatus;
+    }
 
     public Account() {
     }

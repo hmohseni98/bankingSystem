@@ -50,6 +50,7 @@ public class CreditCardRepository {
         preparedStatement.setInt(4, creditCard.getSecondPassword());
         preparedStatement.setInt(5, creditCard.getCvv2());
         preparedStatement.setDate(6, creditCard.getExpireDate());
+        preparedStatement.setInt(7, creditCard.getId());
         preparedStatement.execute();
         preparedStatement.close();
     }
@@ -85,6 +86,27 @@ public class CreditCardRepository {
                 "WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(findById);
         preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        AccountRepository accountRepository = new AccountRepository();
+        CreditCard creditCard = null;
+        if (resultSet.next()) {
+            creditCard = new CreditCard(resultSet.getInt("id"),
+                    accountRepository.findById(resultSet.getInt("account_id")),
+                    resultSet.getString("card_number"),
+                    resultSet.getInt("first_password"),
+                    resultSet.getInt("second_password"),
+                    resultSet.getInt("cvv2"),
+                    resultSet.getDate("expire_date"));
+        }
+        return creditCard;
+    }
+    public CreditCard findByAccountId(Integer account_id) throws SQLException {
+        String findById = "SELECT * FROM credit_card c " +
+                "INNER JOIN account a " +
+                "ON a.id = c.account_id " +
+                "WHERE a.id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(findById);
+        preparedStatement.setInt(1,account_id);
         ResultSet resultSet = preparedStatement.executeQuery();
         AccountRepository accountRepository = new AccountRepository();
         CreditCard creditCard = null;
