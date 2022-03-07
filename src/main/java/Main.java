@@ -1,4 +1,4 @@
-import Database.FakeDB;
+import Database.*;
 import Entity.Account;
 import Entity.Branch;
 import Entity.CreditCard;
@@ -17,8 +17,8 @@ import java.util.Scanner;
 
 public class Main {
     private static String saveCardNumber;
-    public static final String TEXT_RED = "\u001B[31m";
-    public static final String TEXT_RESET = "\u001B[0m";
+    private static final String TEXT_RED = "\u001B[31m";
+    private static final String TEXT_RESET = "\u001B[0m";
 
     public static void main(String[] args) throws SQLException {
         /*
@@ -27,9 +27,8 @@ public class Main {
         2. run fakeDB.CreateData va sepas comment kardan an.
          */
         FakeDB fakeDB = new FakeDB();
-        //fakeDB.fillData();
+        fakeDB.fillData();
         welcomeMenu();
-
 
     }
 
@@ -223,8 +222,7 @@ public class Main {
                     creditCardService.transferAction(amount, srcNumber, dstNumber);
                     System.out.println("success");
                     mainMenu();
-                }
-                else
+                } else
                     mainMenu();
             } else {
                 System.out.println(TEXT_RED + "input information is not correct!" + TEXT_RESET);

@@ -1,13 +1,17 @@
 package Repository;
 
 import Database.CreateConnection;
+import Database.SessionFactorySingleton;
 import Entity.Branch;
 import List.BranchList;
+import lombok.var;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 
 public class BranchRepository {
     private Connection connection = CreateConnection.connection;
+    private SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
     public BranchRepository() throws SQLException {
         String createTable = "CREATE TABLE IF NOT EXISTS branch( " +
@@ -18,6 +22,19 @@ public class BranchRepository {
         preparedStatement.close();
     }
 
+    public Integer insertHibernate(Branch branch) {
+        try (var session = sessionFactory.openSession()){
+            var transaction  = session.beginTransaction();
+            try{
+                session.save(branch);
+                transaction.commit();
+                return branch.getId();
+            } catch (Exception e){
+                transaction.rollback();
+                throw e;
+            }
+        }
+    }
     public Integer insert(Branch branch) throws SQLException {
         String insert = "INSERT INTO branch (name) VALUES (?)";
         PreparedStatement preparedStatement = connection.prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
