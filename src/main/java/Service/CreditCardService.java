@@ -112,7 +112,7 @@ public class CreditCardService {
         creditCard = creditCardRepository.findByCardNumber(cardNumber);
         if (creditCard == null)
             return "null";
-        if (creditCard.getAccount().getStatus() == AccountStatus.deactive){
+        if (creditCard.getAccount().getAccountStatus() == AccountStatus.deactive){
             return "deactive";
         }
         if (creditCard.getFirstPassword().equals(firstPassword))

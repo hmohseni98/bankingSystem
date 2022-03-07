@@ -1,8 +1,8 @@
 package CustomException;
 
 public class InvalidDestinationCard extends RuntimeException{
-    public static final String TEXT_RED = "\u001B[31m";
-    public static final String TEXT_RESET = "\u001B[0m";
+    private static final String TEXT_RED = "\u001B[31m";
+    private static final String TEXT_RESET = "\u001B[0m";
 
     public InvalidDestinationCard() {
     }

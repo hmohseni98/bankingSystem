@@ -4,10 +4,10 @@ import Enum.*;
 import Entity.Account;
 import Entity.Branch;
 import Entity.Customer;
-import List.AccountList;
 import Repository.AccountRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class AccountService {
     private AccountRepository accountRepository = new AccountRepository();
@@ -44,14 +44,12 @@ public class AccountService {
         account = accountRepository.findById(account_id);
         accountRepository.delete(account);
     }
-    public AccountList findAll() throws SQLException {
-        AccountList accountList;
-        accountList =accountRepository.findAll();
+    public List<Account> findAll() throws SQLException {
+        List<Account> accountList =accountRepository.findAll();
         return  accountList;
     }
-    public AccountList findAllByCustomerId(Integer customer_id) throws SQLException{
-        AccountList accountList;
-        accountList = accountRepository.findAllByCustomerId(customer_id);
+    public List<Account> findAllByCustomerId(Integer customer_id) throws SQLException{
+        List<Account>  accountList = accountRepository.findAllByCustomerId(customer_id);
         return accountList;
     }
     public Account findById(Integer account_id) throws SQLException{
@@ -86,7 +84,7 @@ public class AccountService {
         Integer account_id = creditCardService.findByCardNumber(cardNumber);
         Account account;
         account = accountRepository.findById(account_id);
-        account.setStatus(AccountStatus.deactive);
+        account.setAccountStatus(AccountStatus.deactive);
         accountRepository.update(account);
     }
 }
