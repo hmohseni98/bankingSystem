@@ -7,6 +7,7 @@ import Repository.AccountRepository;
 import Repository.BranchRepository;
 import Repository.CustomerRepository;
 import org.junit.jupiter.api.*;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,9 +15,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountRepositoryTest {
+
     private AccountRepository accountRepository;
-    private BranchRepository branchRepository;
-    private CustomerRepository customerRepository;
     private Account account;
     private Branch branch;
     private Branch branch1;
@@ -29,20 +29,21 @@ class AccountRepositoryTest {
     @BeforeEach
     public void beforeEach() throws SQLException {
 
-        customerRepository = new CustomerRepository();
-        branchRepository = new BranchRepository();
+        CustomerRepository customerRepository = new CustomerRepository();
+        BranchRepository branchRepository = new BranchRepository();
         accountRepository = new AccountRepository();
         customer = new Customer(null, "hassan", "mohseni");
         branch = new Branch(null, "saadi");
         branch1 = new Branch(null, "ferdowsi");
 
 
-        customerRepository.insert(customer);
-        branchRepository.insert(branch);
-        branchRepository.insert(branch1);
+        customer.setId(customerRepository.insert(customer));
+        branch.setId(branchRepository.insert(branch));
+        branch1.setId(branchRepository.insert(branch1));
 
 
     }
+
 
     @Test
     public void connectionTest() {
@@ -104,11 +105,11 @@ class AccountRepositoryTest {
         accountRepository.insert(account);
         accountRepository.findById(account.getId());
         //assert
-        List<Account> accountList  = accountRepository.findAll();
+        List<Account> accountList = accountRepository.findAll();
         assertAll(
-                () -> assertEquals(account.getId(),accountList.get(0).getId()),
-                () -> assertEquals(account.getAmount(),accountList.get(0).getAmount()),
-                () -> assertEquals(account.getCustomer().getId(),accountList.get(0).getCustomer().getId())
+                () -> assertEquals(account.getId(), accountList.get(0).getId()),
+                () -> assertEquals(account.getAmount(), accountList.get(0).getAmount()),
+                () -> assertEquals(account.getCustomer().getId(), accountList.get(0).getCustomer().getId())
         );
     }
 
@@ -128,7 +129,7 @@ class AccountRepositoryTest {
     }
 
     @Test
-    public void findAllByCustomerIdTest() throws SQLException {
+    public void findAllByCustomerIdTest() {
         //arrange
         account = new Account(null, branch, customer, 40000, AccountStatus.active);
         Account account1 = new Account(null, branch1, customer, 20000, AccountStatus.active);
@@ -145,20 +146,16 @@ class AccountRepositoryTest {
 
     @AfterEach
     public void afterEach() throws SQLException {
-        String accountSql = "delete from account";
-        PreparedStatement preparedStatement = CreateConnection.connection.prepareStatement(accountSql);
-        String customerSql = "delete from customer";
-        PreparedStatement preparedStatement1 = CreateConnection.connection.prepareStatement(customerSql);
-        String branchSql = "delete from branch";
-        PreparedStatement preparedStatement2 = CreateConnection.connection.prepareStatement(branchSql);
-
-        preparedStatement.execute();
-        preparedStatement1.execute();
-        preparedStatement2.execute();
-
-        preparedStatement.close();
-        preparedStatement1.close();
-        preparedStatement2.close();
+        String[] strings = new String[]{
+                "delete from account",
+                "delete from branch",
+                "delete from customer"
+        };
+        for (String s : strings) {
+            PreparedStatement preparedStatement = CreateConnection.connection.prepareStatement(s);
+            preparedStatement.execute();
+            preparedStatement.close();
+        }
     }
 
     @AfterAll

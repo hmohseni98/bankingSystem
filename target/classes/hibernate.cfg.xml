@@ -9,6 +9,6 @@
         <property name="connection.password">123456</property>
 
         <property name="hibernate.hbm2ddl.auto">create-drop</property> <!-- Generates Database Schema. Do not Use In PRODUCTION! -->
-        <property name="show_sql">false</property>
+        <property name="show_sql">true</property>
     </session-factory>
 </hibernate-configuration>

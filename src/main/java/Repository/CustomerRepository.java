@@ -3,7 +3,6 @@ package Repository;
 import Database.CreateConnection;
 import Database.SessionFactorySingleton;
 import Entity.Customer;
-import lombok.var;
 import org.hibernate.SessionFactory;
 
 import java.sql.*;
@@ -14,14 +13,7 @@ public class CustomerRepository {
 
     private SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
-    public CustomerRepository() throws SQLException {
-        String createTable = "CREATE TABLE IF NOT EXISTS customer( " +
-                "id serial primary key, " +
-                "first_name varchar(30), " +
-                "last_name varchar(50));";
-        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
-        preparedStatement.close();
+    public CustomerRepository() {
     }
 
     public Integer insertHibernate(Customer customer){

@@ -3,7 +3,6 @@ package Database;
 import Entity.Account;
 import Entity.Branch;
 import Entity.Customer;
-import lombok.var;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

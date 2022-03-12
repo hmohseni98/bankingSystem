@@ -4,7 +4,6 @@ import Database.CreateConnection;
 import Database.SessionFactorySingleton;
 import Entity.Branch;
 import List.BranchList;
-import lombok.var;
 import org.hibernate.SessionFactory;
 
 import java.sql.*;
@@ -13,13 +12,7 @@ public class BranchRepository {
     private Connection connection = CreateConnection.connection;
     private SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
-    public BranchRepository() throws SQLException {
-        String createTable = "CREATE TABLE IF NOT EXISTS branch( " +
-                "id serial primary key, " +
-                "name varchar(50));";
-        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
-        preparedStatement.close();
+    public BranchRepository() {
     }
 
     public Integer insertHibernate(Branch branch) {
